@@ -1,0 +1,70 @@
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class toBirthday {
+    public static String daysToBir(String strBDay){
+        String strMSG="Birthday Reminder---";
+        //String strBDay="1990/04/07";//"1990/04/07"; // Next Birtday date
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd");
+        Date dt=null;
+        try
+        {
+            dt=sdf.parse(strBDay);
+        }
+        catch(final java.text.ParseException e)
+        {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        }
+
+        Calendar BDay=Calendar.getInstance();
+        BDay.setTime(dt);
+
+        Calendar today=Calendar.getInstance();
+
+// Take your DOB Month and compare it to current month
+        int BMonth=BDay.get(Calendar.MONTH);
+        int CMonth=today.get(Calendar.MONTH);
+        int BDate = BDay.get(Calendar.DATE);
+        int CDate = today.get(Calendar.DATE);
+        BDay.set(Calendar.YEAR,today.get(Calendar.YEAR));
+        if(BMonth<CMonth)
+        {
+            BDay.set(Calendar.YEAR,today.get(Calendar.YEAR)+1);
+            strMSG ="Birthday passed for this year, days to next birthday is ===";
+        }else if(BMonth==CMonth) {
+            if(BDate<CDate){
+                BDay.set(Calendar.YEAR,today.get(Calendar.YEAR)+1);
+                strMSG ="Birthday passed for this year, days to next birthday is ===";
+            }else if(BDate==CDate){
+                BDay.set(Calendar.DATE,today.get(Calendar.DATE)-1);
+                strMSG ="Today is your birthday, Happy Birthday!!!";
+            }
+            else{
+                strMSG ="days to next birthday is ===";
+            }
+        }else{
+            strMSG ="days to next birthday is ===";
+        }
+
+        // Result in millis
+        final long millis=BDay.getTimeInMillis()-today.getTimeInMillis();
+
+        // Convert to days
+        final long days=millis/86400000+1; // Precalculated (24 * 60 * 60 * 1000)
+
+        sdf=new SimpleDateFormat("EEEE");
+        //String dayOfTheWeek = sdf.format(BDay.getTime());
+        //String dayOfTheWeek=sdf.format(dt);
+        //String dayOfTheWeek =
+        System.out.println(strMSG+days);
+        //System.out.println("It will be       : "+dayOfTheWeek);
+        return strMSG;
+        }
+// Driver code
+public static void main(String[] args)
+        {
+            daysToBir("1990/11/02");
+        }
+}
