@@ -1,0 +1,39 @@
+import java.util.Arrays;
+
+public class GFG {
+
+    // function to display the values
+    public static int[] printNumbers(int n, int d)
+    {
+
+        // Converting d to character
+        String st = "" + d;
+        String si;
+        int[] numbers = new int[0];
+        int len= numbers.length;
+        // Loop to check each digit one by one.
+        for (int i = 0; i <= n; i++) {
+
+            // initialize the string
+            si = "" + i;
+            if (si.indexOf(st) > -1) {
+                //System.out.print(i + " ");
+                numbers = Arrays.copyOf(numbers, numbers.length + 1);
+                numbers[len++]=i;
+            }
+        }
+        return numbers;
+    }
+
+    // Driver code
+    public static void main(String[] args)
+    {
+        int n = 100, d = 5;
+
+        //numbers =
+        int numbers[] = printNumbers(n, d);
+        for (int i=0; i<numbers.length ;i++) {
+            System.out.print(numbers[i] + " ");
+        }
+    }
+}
